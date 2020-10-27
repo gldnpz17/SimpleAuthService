@@ -4,4 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Implementations\DapperPostgres\Config\" />
+    <Folder Include="Implementations\DapperPostgres\SQL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+  </ItemGroup>
+
 </Project>

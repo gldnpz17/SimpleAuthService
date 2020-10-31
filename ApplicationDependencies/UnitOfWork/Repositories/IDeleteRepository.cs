@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Common.External.UnitOfWork.Repositories
+namespace ApplicationDependencies.UnitOfWork.Repositories
 {
-    internal interface IDeleteRepository<TEntity> where TEntity : class
+    public interface IDeleteRepository<TEntity> where TEntity : class
     {
         Task DeleteAsync(TEntity entity);
     }

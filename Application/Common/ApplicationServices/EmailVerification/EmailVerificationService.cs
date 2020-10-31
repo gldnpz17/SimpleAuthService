@@ -1,10 +1,6 @@
-﻿using Application.Common.External.EmailSender;
+﻿using ApplicationDependencies.EmailSender;
 using Domain.Entities;
 using Domain.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Common.ApplicationServices.EmailVerification
 {

@@ -1,4 +1,4 @@
-﻿using Application.Common.External.UnitOfWork;
+﻿using ApplicationDependencies.UnitOfWork;
 using MediatR;
 using System;
 using System.Collections.Generic;

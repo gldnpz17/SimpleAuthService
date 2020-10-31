@@ -1,9 +1,5 @@
-﻿using Application.Common.External.UnitOfWork;
-using Application.Common.External.UnitOfWork.Repositories.Accounts;
+﻿using ApplicationDependencies.UnitOfWork;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

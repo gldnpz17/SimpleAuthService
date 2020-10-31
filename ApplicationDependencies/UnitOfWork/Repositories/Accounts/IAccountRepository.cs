@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Common.External.UnitOfWork.Repositories.Accounts
+namespace ApplicationDependencies.UnitOfWork.Repositories.Accounts
 {
-    internal interface IAccountRepository :
+    public interface IAccountRepository :
         ICreateRepository<Account>,
         IUpdateRepository<Account>,
         IDeleteRepository<Account>,

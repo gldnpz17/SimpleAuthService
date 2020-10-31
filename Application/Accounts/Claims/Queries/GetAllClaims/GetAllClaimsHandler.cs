@@ -1,12 +1,9 @@
 ﻿using Application.Accounts.Claims.Queries.DTOs;
-using Application.Common.External.UnitOfWork;
+using ApplicationDependencies.UnitOfWork;
 using AutoMapper;
 using MediatR;
-using MediatR.Pipeline;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Common.External.UnitOfWork.Repositories.EmailVerificationToken
+namespace ApplicationDependencies.UnitOfWork.Repositories.EmailVerificationToken
 {
     public interface IEmailVerificationToken
     {

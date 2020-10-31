@@ -7,11 +7,13 @@ using Application.Common.ApplicationServices.SecurePasswordSaltGenerator;
 using Application.Common.Extensions.ValidatorRegistrationExtension;
 using Application.Common.Mapper;
 using Application.Common.PipelineBehaviour;
+using ApplicationDependencies.EmailSender;
 using Autofac;
 using AutoMapper;
 using Domain.Services;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
+using MockEmailSender;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,6 +41,7 @@ namespace Application
             builder.RegisterInstance(new Mapper(new MapperConfig().GetConfiguration())).As<IMapper>().SingleInstance();
             builder.RegisterValidators();
             builder.RegisterType(typeof(ValidationBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
+            builder.RegisterType<MockEmailSender.MockEmailSender>().As<IEmailSender>().SingleInstance();
 
             #region Application Services
             builder.RegisterType<AlphanumericTokenGenerator>().As<IAlphanumericTokenGenerator>().SingleInstance();

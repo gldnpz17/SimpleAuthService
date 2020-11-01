@@ -1,6 +1,5 @@
 ﻿using Application.Accounts.Claims.Queries.DTOs;
 using Application.Accounts.Emails.Queries.DTOs;
-using Application.Accounts.Queries.DTOs.GetAccountById;
 using Application.Authentication.Queries.DTOs;
 using AutoMapper;
 using Domain.Entities;
@@ -19,7 +18,7 @@ namespace Application.Common.Mapper
             return new MapperConfiguration(
                 config =>
                 {
-                    config.CreateMap<Account, Accounts.Queries.DTOs.GetAccountById.AccountDto>().ForMember(
+                    config.CreateMap<Account, Accounts.Queries.DTOs.AccountDto>().ForMember(
                         (dest) => dest.AccountId,
                         (opt) => opt.MapFrom(src => src.Id));
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Accounts.Queries.DTOs
+namespace SimpleAuthServiceApi.Common.DTOs.Response
 {
-    public class AccountDto
+    public class ApiVerifyTokenGetAccountDto
     {
         public Guid AccountId { get; set; }
         public string Username { get; set; }

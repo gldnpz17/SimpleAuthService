@@ -1,4 +1,4 @@
-﻿using Application.Accounts.Queries.DTOs.GetAccountById;
+﻿using Application.Accounts.Queries.DTOs;
 using ApplicationDependencies.UnitOfWork;
 using AutoMapper;
 using MediatR;

@@ -20,17 +20,16 @@ using Application.Accounts.Queries.GetAllAccounts;
 using Application.Authentication.Commands.Logout;
 using Application.Authentication.Queries.AuthenticateToken;
 using Application.Authentication.Queries.PasswordLogin;
-using Domain.Entities;
 using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
-namespace ConsoleFrontend
+namespace UseCaseManualTestingConsole
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async System.Threading.Tasks.Task Main(string[] args)
         {
+            //writing unit tests take quite a while. this should do for the time being.
+
             //use case checklist:
             /*
              * create account[v]
@@ -63,18 +62,18 @@ namespace ConsoleFrontend
             var mediator = app.Mediator;
 
             //create account
-            await mediator.Send(new CreateAccountCommand() { Username = "lorem", Password = "ipsum", EmailAddress = "lorem@ipsum.com" });
-            await mediator.Send(new CreateAccountCommand() { Username = "dolor", Password = "sitamet", EmailAddress = "dolor@sitamet.com" });
+            await mediator.Send(new CreateAccountCommand() { Username = "lorem", Password = "ipsumipsum", EmailAddress = "lorem@ipsum.com" });
+            await mediator.Send(new CreateAccountCommand() { Username = "dolor", Password = "sitametsitamet", EmailAddress = "dolor@sitamet.com" });
 
             //login
-            var authDto = await mediator.Send(new PasswordLoginQuery() { Username = "lorem", Password = "ipsum" });
+            var authDto = await mediator.Send(new PasswordLoginQuery() { Username = "lorem", Password = "ipsumipsum" });
             Console.WriteLine($"[authDto] authToken={authDto.AuthToken}");
-            
+
             //authenticate auth token
             var account1 = await mediator.Send(new AuthenticateTokenQuery() { AuthToken = authDto.AuthToken });
-            
+
             //update username
-            await mediator.Send(new UpdateUsernameCommand() { Id = account1.AccountId, NewUsername = "lorem2" });
+            await mediator.Send(new UpdateUsernameCommand() { AccountId = account1.AccountId, NewUsername = "lorem2" });
             var renamedAccount = await mediator.Send(new AuthenticateTokenQuery() { AuthToken = authDto.AuthToken });
             Console.WriteLine($"[renamedAccount] newUsername={renamedAccount.Username}");
 
@@ -94,8 +93,8 @@ namespace ConsoleFrontend
             await mediator.Send(new SendEmailVerificationMessageCommand() { AccountId = account1.AccountId, EmailAddress = "lorem2@ipsum.com" });
 
             //verify email
-            //var emailVerifToken = Console.ReadLine();
-            //await mediator.Send(new VerifyEmailAddressCommand() { VerificationCode = emailVerifToken });
+            var emailVerifToken = Console.ReadLine();
+            await mediator.Send(new VerifyEmailAddressCommand() { VerificationCode = emailVerifToken });
 
             //get primary email
             var primaryEmail = await mediator.Send(new GetPrimaryEmailAddressQuery() { AccountId = account1.AccountId });
@@ -124,17 +123,17 @@ namespace ConsoleFrontend
             await mediator.Send(new RequestPasswordResetCommand() { AccountId = account1.AccountId });
 
             //reset password[v]
-            //var resetToken = Console.ReadLine();
-            //await mediator.Send(new ResetPasswordCommand() { AccountId = account1.AccountId, NewPassword = "ipsum2", ResetToken = resetToken });
-            //authDto = await mediator.Send(new PasswordLoginQuery() { Username = "lorem2", Password = "ipsum2" });
-            //Console.WriteLine($"[authDto] authToken={authDto.AuthToken}");
-            
+            var resetToken = Console.ReadLine();
+            await mediator.Send(new ResetPasswordCommand() { AccountId = account1.AccountId, NewPassword = "ipsum2ipsum2", ResetToken = resetToken });
+            authDto = await mediator.Send(new PasswordLoginQuery() { Username = "lorem2", Password = "ipsum2ipsum2" });
+            Console.WriteLine($"[authDto] authToken={authDto.AuthToken}");
+
             //add claim
             await mediator.Send(new AddClaimCommand() { AccountId = account1.AccountId, ClaimName = "Claim1", ClaimValue = "Claim1Value" });
             await mediator.Send(new AddClaimCommand() { AccountId = account1.AccountId, ClaimName = "Claim2", ClaimValue = "Claim2Value" });
 
             //get all claims
-            var claims = await mediator.Send(new GetAllClaimsQuery() { AccountId=account1.AccountId });
+            var claims = await mediator.Send(new GetAllClaimsQuery() { AccountId = account1.AccountId });
             claims.ForEach(i => Console.WriteLine($"[claims] name={i.Name}, value={i.Value}"));
 
             //change claim value
@@ -150,8 +149,15 @@ namespace ConsoleFrontend
             //log out
             await mediator.Send(new LogoutCommand() { AuthToken = authDto.AuthToken });
 
-            //reverify token
-            account1 = await mediator.Send(new AuthenticateTokenQuery() { AuthToken = authDto.AuthToken });
+            //reverify token[v]
+            try
+            {
+                account1 = await mediator.Send(new AuthenticateTokenQuery() { AuthToken = authDto.AuthToken });
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"[revoked token error] {ex.Message}");
+            }
 
             Console.ReadKey();
         }

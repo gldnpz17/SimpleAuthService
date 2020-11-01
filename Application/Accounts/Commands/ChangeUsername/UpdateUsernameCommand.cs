@@ -7,7 +7,7 @@ namespace Application.Accounts.Commands.ChangeUsername
 {
     public class UpdateUsernameCommand : IRequest
     {
-        public Guid Id { get; set; }
+        public Guid AccountId { get; set; }
         public string NewUsername { get; set; }
     }
 }

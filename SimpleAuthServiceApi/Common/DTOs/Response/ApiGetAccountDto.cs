@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Application.Accounts.Queries.DTOs
+namespace SimpleAuthServiceApi.Common.DTOs.Response
 {
-    public class AccountDto
+    public class ApiGetAccountDto
     {
         public Guid AccountId { get; set; }
         public string Username { get; set; }

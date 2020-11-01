@@ -7,7 +7,7 @@ namespace Application.Accounts.Commands.ChangeUsername
 {
     internal class UpdateUsernameCommandValidator : AbstractValidator<UpdateUsernameCommand>
     {
-        internal UpdateUsernameCommandValidator()
+        public UpdateUsernameCommandValidator()
         {
             RuleFor(v => v.NewUsername)
                 .MaximumLength(64)

@@ -17,7 +17,7 @@ namespace Application.Accounts.Commands.ChangeUsername
 
         public async Task<Unit> Handle(UpdateUsernameCommand request, CancellationToken cancellationToken)
         {
-            var account = await _unitOfWork.Accounts.ReadByIdAsync(request.Id);
+            var account = await _unitOfWork.Accounts.ReadByIdAsync(request.AccountId);
             
             account.Username = request.NewUsername;
 

@@ -1,4 +1,4 @@
-﻿using Application.Accounts.Queries.DTOs.GetAccountById;
+﻿using Application.Accounts.Queries.DTOs;
 using MediatR;
 using System;
 using System.Collections.Generic;

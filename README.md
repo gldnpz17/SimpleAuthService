@@ -15,4 +15,4 @@ This is a simple identity management and authentication service that lets you:
 * NSwag (API Documentation)
 
 ## Getting Started
-simply deploy and navigate to [base url]/swagger
+Simply deploy and navigate to [base url]/swagger in the browser.

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Domain.Services
 {
-    public interface ISecurePasswordSaltGeneratorService
+    public interface ISecureRandomStringGeneratorService
     {
-        string GenerateSalt();
+        string GenerateSecureRandomString();
     }
 }

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Application.Accounts.Emails.Commands.TryToVerifyEmailAddress
 {
-    internal class TryToVerifyEmailAddressCommandValidator : AbstractValidator<TryToVerifyEmailAddressCommand>
+    internal class SendEmailVerificationMessageCommandValidator : AbstractValidator<SendEmailVerificationMessageCommand>
     {
-        public TryToVerifyEmailAddressCommandValidator()
+        public SendEmailVerificationMessageCommandValidator()
         {
             RuleFor(v => v.EmailAddress)
                 .EmailAddress();

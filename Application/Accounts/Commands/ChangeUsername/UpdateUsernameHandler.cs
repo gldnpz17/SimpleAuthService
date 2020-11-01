@@ -9,7 +9,8 @@ namespace Application.Accounts.Commands.ChangeUsername
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        internal UpdateUsernameHandler(IUnitOfWork unitOfWork)
+        public UpdateUsernameHandler(
+            IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -20,7 +21,6 @@ namespace Application.Accounts.Commands.ChangeUsername
             
             account.Username = request.NewUsername;
 
-            await _unitOfWork.Accounts.UpdateAsync(account);
             await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;

@@ -9,18 +9,19 @@ namespace Domain.Entities
 {
     public class PasswordCredential
     {
+        public Guid AccountId { get; set; }
         public Account Account { get; set; }
         public string HashedPassword { get; set; }
         public string PasswordSalt { get; set; }
         public PasswordHashingAlgorithm PasswordHashingAlgorithm { get; set; }
-        public IList<PasswordResetToken> PasswordResetTokens { get; set; }
+        public IList<PasswordResetToken> PasswordResetTokens { get; private set; } = new List<PasswordResetToken>();
 
         public void SetPassword(
             string password, 
             IPasswordHashingService passwordHasher, 
-            ISecurePasswordSaltGeneratorService saltGenerator)
+            ISecureRandomStringGeneratorService saltGenerator)
         {
-            PasswordSalt = saltGenerator.GenerateSalt();
+            PasswordSalt = saltGenerator.GenerateSecureRandomString();
             HashedPassword = passwordHasher.HashPassword(password, PasswordSalt);
         }
 
@@ -29,26 +30,32 @@ namespace Domain.Entities
             IAlphanumericTokenGenerator tokenGenerator)
         {
             //disable previous reset tokens
-            PasswordResetTokens.ToList().ForEach(i => i.IsActive = false);
+            PasswordResetTokens?.ToList().ForEach(i => i.IsActive = false);
 
-            passwordResetTokenSender.SendResetToken(
-                Account.PrimaryEmail,
+            var newResetToken = 
                 new PasswordResetToken()
                 {
                     ResetToken = tokenGenerator.GenerateAlphanumericToken(64),
                     IsActive = true
-                });
+                };
+
+            PasswordResetTokens.Add(newResetToken);
+
+            passwordResetTokenSender.SendResetToken(
+                Account.PrimaryEmail,
+                newResetToken
+                );
         }
 
         public void ResetPassword(
             string newPassword, 
             IPasswordHashingService passwordHasher, 
             PasswordResetToken resetToken,
-            ISecurePasswordSaltGeneratorService saltGenerator)
+            ISecureRandomStringGeneratorService saltGenerator)
         {
             if (PasswordResetTokens.Contains(resetToken) && resetToken.IsActive)
             {
-                PasswordSalt = saltGenerator.GenerateSalt();
+                PasswordSalt = saltGenerator.GenerateSecureRandomString();
                 HashedPassword = passwordHasher.HashPassword(newPassword, PasswordSalt);
             }
         }

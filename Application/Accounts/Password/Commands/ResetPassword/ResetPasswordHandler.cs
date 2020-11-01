@@ -11,12 +11,12 @@ namespace Application.Accounts.Password.Commands.ResetPassword
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordHashingService _passwordHashingService;
-        private readonly ISecurePasswordSaltGeneratorService _securePasswordSaltGenerator;
+        private readonly ISecureRandomStringGeneratorService _securePasswordSaltGenerator;
 
         public ResetPasswordHandler(
             IUnitOfWork unitOfWork,
             IPasswordHashingService passwordHashingService,
-            ISecurePasswordSaltGeneratorService securePasswordSaltGenerator)
+            ISecureRandomStringGeneratorService securePasswordSaltGenerator)
         {
             _unitOfWork = unitOfWork;
             _passwordHashingService = passwordHashingService;

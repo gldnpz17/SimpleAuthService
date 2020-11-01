@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ApplicationDependencies.UnitOfWork.Repositories
 {
-    public interface ICreateRepository<TEntity> where TEntity : class
+    public interface IAuthenticationRepository
     {
-        Task CreateAsync(TEntity entity);
+        Task<Authentication> GetAuthenticationAsync();
     }
 }

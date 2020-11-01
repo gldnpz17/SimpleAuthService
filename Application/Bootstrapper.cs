@@ -1,4 +1,5 @@
-﻿using Application.Common.ApplicationServices.AlphanumericTokenGenerator;
+﻿using Application.Accounts.Commands.CreateAccount;
+using Application.Common.ApplicationServices.AlphanumericTokenGenerator;
 using Application.Common.ApplicationServices.DateTime;
 using Application.Common.ApplicationServices.EmailVerification;
 using Application.Common.ApplicationServices.PasswordHashing;
@@ -8,14 +9,17 @@ using Application.Common.Extensions.ValidatorRegistrationExtension;
 using Application.Common.Mapper;
 using Application.Common.PipelineBehaviour;
 using ApplicationDependencies.EmailSender;
+using ApplicationDependencies.UnitOfWork;
 using Autofac;
 using AutoMapper;
 using Domain.Services;
+using EFCorePostgresPersistence.UnitOfWork;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MockEmailSender;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace Application
@@ -37,11 +41,15 @@ namespace Application
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<Mediator>().As<IMediator>().SingleInstance();
+            builder.RegisterMediatR(Assembly.GetExecutingAssembly());
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .Where(t => t.IsAssignableFrom(typeof(IRequestHandler<>)))
+                .AsSelf();
             builder.RegisterInstance(new Mapper(new MapperConfig().GetConfiguration())).As<IMapper>().SingleInstance();
             builder.RegisterValidators();
-            builder.RegisterType(typeof(ValidationBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
+            //builder.RegisterType(typeof(ValidationBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
             builder.RegisterType<MockEmailSender.MockEmailSender>().As<IEmailSender>().SingleInstance();
+            builder.RegisterType<EFCoreInMemoryPersistence.UnitOfWork.UnitOfWork>().As<IUnitOfWork>().SingleInstance();
 
             #region Application Services
             builder.RegisterType<AlphanumericTokenGenerator>().As<IAlphanumericTokenGenerator>().SingleInstance();
@@ -49,7 +57,7 @@ namespace Application
             builder.RegisterType<EmailVerificationService>().As<IEmailVerifierService>().SingleInstance();
             builder.RegisterType<PasswordHashingService>().As<IPasswordHashingService>().SingleInstance();
             builder.RegisterType<PasswordResetTokenSender>().As<IPasswordResetTokenSenderService>().SingleInstance();
-            builder.RegisterType<SecurePasswordSaltGeneratorService>().As<ISecurePasswordSaltGeneratorService>();
+            builder.RegisterType<SecurePasswordSaltGeneratorService>().As<ISecureRandomStringGeneratorService>();
             #endregion
 
             _container = builder.Build();

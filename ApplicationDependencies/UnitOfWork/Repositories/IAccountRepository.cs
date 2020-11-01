@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationDependencies.UnitOfWork.Repositories.Accounts
+namespace ApplicationDependencies.UnitOfWork.Repositories
 {
     public interface IAccountRepository :
-        ICreateRepository<Account>,
-        IUpdateRepository<Account>,
-        IDeleteRepository<Account>,
-        IReadAllRepository<Account>
+        IGenericCreateRepository<Account>,
+        IGenericDeleteRepository<Account>,
+        IGenericReadAllRepository<Account>
     {
         Task<Account> ReadByIdAsync(Guid id);
     }

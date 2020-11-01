@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationDependencies.UnitOfWork.Repositories
 {
-    public interface IUpdateRepository<TEntity> where TEntity : class
+    public interface IGenericUpdateRepository<TEntity> where TEntity : class
     {
         Task UpdateAsync(TEntity entity);
     }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Accounts.Emails.Commands.TryToVerifyEmailAddress
 {
-    public class TryToVerifyEmailAddressCommand : IRequest
+    public class SendEmailVerificationMessageCommand : IRequest
     {
         public Guid AccountId { get; set; }
         public string EmailAddress { get; set; }

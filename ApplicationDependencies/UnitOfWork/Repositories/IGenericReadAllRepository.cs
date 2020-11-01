@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationDependencies.UnitOfWork.Repositories
 {
-    public interface IReadAllRepository<TEntity> where TEntity : class
+    public interface IGenericReadAllRepository<TEntity> where TEntity : class
     {
         Task<IList<TEntity>> ReadAllAsync();
     }

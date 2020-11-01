@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationDependencies.UnitOfWork.Repositories
 {
-    public interface IDeleteRepository<TEntity> where TEntity : class
+    public interface IGenericDeleteRepository<TEntity> where TEntity : class
     {
         Task DeleteAsync(TEntity entity);
     }

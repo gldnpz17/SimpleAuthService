@@ -9,8 +9,16 @@ namespace Domain.Entities
 {
     public class Authentication
     {
-        public IList<AuthToken> AuthTokens { get; private set; } = new List<AuthToken>();
-        public IList<Account> Accounts { get; private set; } = new List<Account>();
+        public Authentication(
+            ICollection<AuthToken> authTokens,
+            ICollection<Account> accounts)
+        {
+            AuthTokens = authTokens;
+            Accounts = accounts;
+        }
+
+        public ICollection<AuthToken> AuthTokens { get; private set; }
+        public ICollection<Account> Accounts { get; private set; }
 
         public AuthToken PasswordLogin(
             string username, 

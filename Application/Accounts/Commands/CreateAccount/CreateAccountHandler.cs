@@ -13,14 +13,14 @@ namespace Application.Accounts.Commands.CreateAccount
         private readonly IPasswordHashingService _passwordHashingService;
         private readonly IEmailVerifierService _emailVerifierService;
         private readonly IAlphanumericTokenGenerator _alphanumericTokenGenerator;
-        private readonly ISecurePasswordSaltGeneratorService _securePasswordSaltGenerator;
+        private readonly ISecureRandomStringGeneratorService _securePasswordSaltGenerator;
 
-        internal CreateAccountHandler(
+        public CreateAccountHandler(
             IUnitOfWork unitOfWork,
             IPasswordHashingService passwordHashingService,
             IEmailVerifierService emailVerifierService,
             IAlphanumericTokenGenerator alphanumericTokenGenerator,
-            ISecurePasswordSaltGeneratorService securePasswordSaltGenerator)
+            ISecureRandomStringGeneratorService securePasswordSaltGenerator)
         {
             _unitOfWork = unitOfWork;
             _passwordHashingService = passwordHashingService;
@@ -46,9 +46,12 @@ namespace Application.Accounts.Commands.CreateAccount
             };
 
             newAccount.Emails.Add(newEmailAddress);
-            newAccount.PrimaryEmail = newEmailAddress;
 
             await _unitOfWork.Accounts.CreateAsync(newAccount);
+            await _unitOfWork.SaveChangesAsync();
+
+            newAccount.PrimaryEmail = newEmailAddress;
+
             await _unitOfWork.SaveChangesAsync();
 
             newEmailAddress.SendVerificationRequest(_emailVerifierService, _alphanumericTokenGenerator);

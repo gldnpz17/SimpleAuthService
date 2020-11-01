@@ -32,7 +32,9 @@ namespace Application.Authentication.Queries.AuthenticateToken
 
             await _unitOfWork.SaveChangesAsync();
 
-            return _mapper.Map<AccountDto>(result);
+            var resultDto = _mapper.Map<AccountDto>(result);
+
+            return resultDto;
         }
     }
 }

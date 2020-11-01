@@ -4,9 +4,9 @@ using System.Security.Cryptography;
 
 namespace Application.Common.ApplicationServices.SecurePasswordSaltGenerator
 {
-    public class SecurePasswordSaltGeneratorService : ISecurePasswordSaltGeneratorService
+    public class SecurePasswordSaltGeneratorService : ISecureRandomStringGeneratorService
     {
-        public string GenerateSalt()
+        public string GenerateSecureRandomString()
         {
             var cryptoRng = new RNGCryptoServiceProvider();
 

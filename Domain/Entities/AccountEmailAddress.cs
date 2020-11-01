@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public string EmailAddress { get; set; }
         public bool IsVerified { get; set; }
-        public IList<EmailVerificationToken> VerificationTokens { get; set; }
+        public IList<EmailVerificationToken> VerificationTokens { get; private set; } = new List<EmailVerificationToken>();
 
         public void SendVerificationRequest(IEmailVerifierService emailVerifier, IAlphanumericTokenGenerator tokenGenerator)
         {
@@ -40,6 +40,10 @@ namespace Domain.Entities
                 if (emailVerificationToken.IsActive)
                 {
                     IsVerified = true;
+                }
+                else
+                {
+                    throw new Exception("invalid email verification token.");
                 }
             }
         }

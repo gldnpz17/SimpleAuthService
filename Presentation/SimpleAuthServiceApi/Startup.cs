@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ApiSecurityPersistence;
-using ApiSecurityPersistence.Models;
+using ApiKeyPersistence;
 using Application;
 using AutoMapper;
 using MediatR;
@@ -55,10 +54,8 @@ namespace SimpleAuthServiceApi
             var useCaseBootstrapper = new Bootstrapper();
             services.AddSingleton(useCaseBootstrapper.Mediator);
 
-            var apiSecurityDbContext = new ApiSecurityDbContext();
-            apiSecurityDbContext.ApiKeys.Add(new ApiKey() { KeyString = "hahahah" });
-            apiSecurityDbContext.SaveChanges();
-            services.AddSingleton(apiSecurityDbContext);
+            var apiKeyDbContext = new ApiKeyDbContext();
+            services.AddSingleton(apiKeyDbContext);
 
             services.AddControllers();
 

@@ -1,4 +1,4 @@
-﻿using ApiSecurityPersistence;
+﻿using ApiKeyPersistence;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,13 +11,13 @@ namespace SimpleAuthServiceApi.Common.Middlewares.ApiKeyMiddleware
 {
     public class ApiKeyMiddleware : MiddlewareBase
     {
-        private readonly ApiSecurityDbContext _apiSecurityDbContext;
+        private readonly ApiKeyDbContext _apiKeyDbContext;
 
         public ApiKeyMiddleware(
             RequestDelegate next,
-            ApiSecurityDbContext apiSecurityDbContext) : base(next)
+            ApiKeyDbContext apiKeyDbContext) : base(next)
         {
-            _apiSecurityDbContext = apiSecurityDbContext;
+            _apiKeyDbContext = apiKeyDbContext;
         }
 
         public override async Task InvokeAsync(HttpContext context)
@@ -28,7 +28,7 @@ namespace SimpleAuthServiceApi.Common.Middlewares.ApiKeyMiddleware
 
                 if (context.Request.Headers["Api-Key"].Count > 0)
                 {
-                    var apiKeys = await _apiSecurityDbContext.ApiKeys.ToListAsync();
+                    var apiKeys = await _apiKeyDbContext.ApiKeys.ToListAsync();
                     var requestApiKey = context.Request.Headers["Api-Key"].First();
 
                     if (apiKeys.Where(i => requestApiKey == i.KeyString).Any())

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Application.Common.Configuration;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,16 +8,17 @@ namespace Application.Accounts.Commands.CreateAccount
 {
     internal class CreateAccountCommandValidator : AbstractValidator<CreateAccountCommand>
     {
-        public CreateAccountCommandValidator()
+        public CreateAccountCommandValidator(
+            ApplicationConfiguration configuration)
         {
             RuleFor(v => v.Username)
-                .MaximumLength(64)
+                .MaximumLength(configuration.MaxUsernameLength)
                 .NotEmpty()
                 .NotNull();
 
             RuleFor(v => v.Password)
-                .MinimumLength(8)
-                .MaximumLength(256);
+                .MinimumLength(configuration.MinPasswordLength)
+                .MaximumLength(configuration.MaxPasswordLength);
         }
     }
 }

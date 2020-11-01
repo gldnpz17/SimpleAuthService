@@ -5,6 +5,7 @@ using Application.Common.ApplicationServices.EmailVerification;
 using Application.Common.ApplicationServices.PasswordHashing;
 using Application.Common.ApplicationServices.PasswordResetTokenSender;
 using Application.Common.ApplicationServices.SecurePasswordSaltGenerator;
+using Application.Common.Configuration;
 using Application.Common.Mapper;
 using Application.Common.PipelineBehaviour;
 using ApplicationDependencies.EmailSender;
@@ -58,6 +59,14 @@ namespace Application
             builder.RegisterType<MockEmailSender.MockEmailSender>().As<IEmailSender>().SingleInstance();
             
             builder.RegisterType<EFCoreInMemoryPersistence.UnitOfWork.UnitOfWork>().As<IUnitOfWork>().SingleInstance();
+
+            builder.RegisterInstance(
+                new ApplicationConfiguration()
+                {
+                    MaxUsernameLength = 64,
+                    MinPasswordLength = 8,
+                    MaxPasswordLength = 128
+                });
 
             #region Application Services
             builder.RegisterType<AlphanumericTokenGenerator>().As<IAlphanumericTokenGenerator>().SingleInstance();

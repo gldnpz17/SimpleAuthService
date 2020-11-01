@@ -8,13 +8,17 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.8.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\UseCases\Application\Application.csproj" />
-    <ProjectReference Include="..\PresentationInfrastructure\ApiSecurityPersistence\ApiSecurityPersistence.csproj" />
+    <ProjectReference Include="..\PresentationInfrastructure\ApiKeyPersistence\ApiKeyPersistence.csproj" />
   </ItemGroup>
 
 </Project>

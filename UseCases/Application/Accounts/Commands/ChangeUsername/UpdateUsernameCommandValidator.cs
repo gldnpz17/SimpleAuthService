@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Application.Common.Configuration;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,10 +8,11 @@ namespace Application.Accounts.Commands.ChangeUsername
 {
     internal class UpdateUsernameCommandValidator : AbstractValidator<UpdateUsernameCommand>
     {
-        public UpdateUsernameCommandValidator()
+        public UpdateUsernameCommandValidator(
+            ApplicationConfiguration configuration)
         {
             RuleFor(v => v.NewUsername)
-                .MaximumLength(64)
+                .MaximumLength(configuration.MaxUsernameLength)
                 .NotNull()
                 .NotEmpty();
         }

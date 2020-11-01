@@ -19,7 +19,7 @@ namespace EFCorePostgresPersistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("User ID = postgres; Password = SuperSekrit; Host = localhost; Port = 5432; Database = SimplAuthServiceDevDB;");
+            optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("SIMPLE_AUTH_SERVICE_CONNECTION_STRING"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

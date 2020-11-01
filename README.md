@@ -14,4 +14,4 @@ This is a simple identity management and authentication service that lets you:
 * PostgreSQL (Persistence)
 
 ## Getting Started
-[w.i.p]
+simply deploy and navigate to [base url]/swagger

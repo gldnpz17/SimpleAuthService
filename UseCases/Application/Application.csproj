@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Entities\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\EFCoreInMemoryPersistence\EFCoreInMemoryPersistence.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\EFCorePostgresPersistence\EFCorePostgresPersistence.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\MockEmailSender\MockEmailSender.csproj" />
     <ProjectReference Include="..\ApplicationDependencies\ApplicationDependencies.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\EFCoreInMemoryPersistence\EFCoreInMemoryPersistence.csproj" />
-    <ProjectReference Include="..\EFCorePostgresPersistence\EFCorePostgresPersistence.csproj" />
-    <ProjectReference Include="..\MockEmailSender\MockEmailSender.csproj" />
   </ItemGroup>
 
   <ItemGroup>

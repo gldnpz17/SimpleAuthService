@@ -12,6 +12,7 @@ This is a simple identity management and authentication service that lets you:
 * Automapper (Object-object mapping)
 * FluentValidation (Input validation)
 * PostgreSQL (Persistence)
+* NSwag (API Documentation)
 
 ## Getting Started
 simply deploy and navigate to [base url]/swagger

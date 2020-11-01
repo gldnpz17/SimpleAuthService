@@ -1,7 +1,7 @@
 # SimpleAuthService
 This is a simple identity management and authentication service that lets you:
 * Manage accounts and account emails
-* Manage authentication(Password, TOTP 2FA[w.i.p], and Backup Code 2FA[w.i.p])
+* Manage authentication
 * Manage account claims
 
 ## Technologies

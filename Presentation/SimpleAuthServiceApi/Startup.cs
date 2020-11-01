@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiSecurityPersistence;
+using ApiSecurityPersistence.Models;
 using Application;
 using AutoMapper;
 using MediatR;
@@ -11,7 +13,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NSwag.Generation.Processors.Security;
 using SimpleAuthServiceApi.Common.Mapper;
+using SimpleAuthServiceApi.Common.Middlewares.ApiKeyMiddleware;
 
 namespace SimpleAuthServiceApi
 {
@@ -24,6 +28,16 @@ namespace SimpleAuthServiceApi
             services.AddSwaggerDocument(
                 (config) => 
                 {
+                    config.DocumentProcessors.Add(
+                        new SecurityDefinitionAppender("ApiKey",
+                        new NSwag.OpenApiSecurityScheme
+                        {
+                            Type = NSwag.OpenApiSecuritySchemeType.ApiKey,
+                            Name = "Api-Key",
+                            In = NSwag.OpenApiSecurityApiKeyLocation.Header,
+                        }));
+                    config.OperationProcessors.Add(new OperationSecurityScopeProcessor("ApiKey"));
+
                     config.PostProcess =
                     (document) =>
                     {
@@ -40,6 +54,11 @@ namespace SimpleAuthServiceApi
 
             var useCaseBootstrapper = new Bootstrapper();
             services.AddSingleton(useCaseBootstrapper.Mediator);
+
+            var apiSecurityDbContext = new ApiSecurityDbContext();
+            apiSecurityDbContext.ApiKeys.Add(new ApiKey() { KeyString = "hahahah" });
+            apiSecurityDbContext.SaveChanges();
+            services.AddSingleton(apiSecurityDbContext);
 
             services.AddControllers();
 
@@ -58,6 +77,8 @@ namespace SimpleAuthServiceApi
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
+
+            app.UseApiKey();
 
             app.UseEndpoints(endpoints =>
             {

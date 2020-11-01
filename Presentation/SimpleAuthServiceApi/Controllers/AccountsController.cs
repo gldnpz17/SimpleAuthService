@@ -53,7 +53,7 @@ namespace SimpleAuthServiceApi.Controllers
 
             results.ForEach(i => output.Add(_mapper.Map<ApiGetAccountDto>(i)));
 
-            return Ok(await _mediator.Send(output));
+            return Ok(output);
         }
 
         /// <summary>

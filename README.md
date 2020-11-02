@@ -1,5 +1,6 @@
 # SimpleAuthService
 Contributor(s): Firdaus Bisma Suryakusuma ([github](https://github.com/gldnpz17))  
+
 This is a simple identity management and authentication service that lets you:
 * Manage accounts and account emails
 * Manage authentication
@@ -13,6 +14,7 @@ This is a simple identity management and authentication service that lets you:
 * Automapper (Object-object mapping)
 * FluentValidation (Input validation)
 * PostgreSQL (Persistence)
+* ASP.NET Core (Web Framework)
 * NSwag (API Documentation)
 
 ## Getting Started

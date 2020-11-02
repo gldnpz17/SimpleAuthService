@@ -147,7 +147,11 @@ namespace SimpleAuthServiceApi.Controllers
         [HttpPost("logout")]
         public async Task<ActionResult> Logout([FromBody]ApiLogoutDto dto)
         {
-            return Ok(await _mediator.Send(_mapper.Map<LogoutCommand>(dto)));
+            return Ok(await _mediator.Send(
+                new LogoutCommand()
+                {
+                    AuthToken = dto.AuthToken
+                }));
         }
 
         /// <summary>

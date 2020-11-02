@@ -10,7 +10,7 @@ namespace ApplicationDependencies.UnitOfWork
     {
         IAccountRepository Accounts { get; }
         IAuthTokenRepository AuthTokens { get; }
-        IEmailVerificationTokenRepository EmailVerificationToken { get; }
+        IEmailVerificationTokenRepository EmailVerificationTokens { get; }
         Task SaveChangesAsync();
     }
 }

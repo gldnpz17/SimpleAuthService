@@ -160,28 +160,32 @@ namespace EFCorePostgresPersistence.Migrations
                 {
                     b.HasOne("Domain.Entities.Account", null)
                         .WithMany("Emails")
-                        .HasForeignKey("AccountId");
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Entities.AuthToken", b =>
                 {
                     b.HasOne("Domain.Entities.Account", "Account")
                         .WithMany("AuthTokens")
-                        .HasForeignKey("AccountId");
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Entities.Claim", b =>
                 {
                     b.HasOne("Domain.Entities.Account", null)
                         .WithMany("Claims")
-                        .HasForeignKey("AccountId");
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Entities.EmailVerificationToken", b =>
                 {
                     b.HasOne("Domain.Entities.AccountEmailAddress", "EmailAddress")
                         .WithMany("VerificationTokens")
-                        .HasForeignKey("EmailAddress1");
+                        .HasForeignKey("EmailAddress1")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Entities.PasswordCredential", b =>
@@ -197,7 +201,8 @@ namespace EFCorePostgresPersistence.Migrations
                 {
                     b.HasOne("Domain.Entities.PasswordCredential", null)
                         .WithMany("PasswordResetTokens")
-                        .HasForeignKey("PasswordCredentialAccountId");
+                        .HasForeignKey("PasswordCredentialAccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

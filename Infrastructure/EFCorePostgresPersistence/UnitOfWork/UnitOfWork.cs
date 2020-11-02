@@ -1,5 +1,7 @@
 ﻿using ApplicationDependencies.UnitOfWork;
 using ApplicationDependencies.UnitOfWork.Repositories;
+using Domain.Entities;
+using EFCorePostgresPersistence.Helpers.RepositoryBase;
 using EFCorePostgresPersistence.UnitOfWork.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,25 +13,37 @@ namespace EFCorePostgresPersistence.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _appDbContext;
+        private readonly List<RepositoryBase> _repositories = new List<RepositoryBase>();
 
         public UnitOfWork()
         {
             _appDbContext = new AppDbContext();
 
-            Accounts = new AccountsRepository(_appDbContext);
-            EmailVerificationToken = new EmailVerificationTokenRepository(_appDbContext);
-            AuthTokens = new AuthTokenRepository(_appDbContext);
+            var accounts = new AccountsRepository(_appDbContext);
+            _repositories.Add(accounts);
+            Accounts = accounts;
+
+            var emailVerificationTokens = new EmailVerificationTokenRepository(_appDbContext);
+            _repositories.Add(emailVerificationTokens);
+            EmailVerificationTokens = emailVerificationTokens;
+
+            var authTokens = new AuthTokenRepository(_appDbContext);
+            _repositories.Add(authTokens);
+            AuthTokens = authTokens;
         }
 
         public IAccountRepository Accounts { get; private set; }
 
-        public IEmailVerificationTokenRepository EmailVerificationToken { get; private set; }
+        public IEmailVerificationTokenRepository EmailVerificationTokens { get; private set; }
 
         public IAuthTokenRepository AuthTokens { get; private set; }
 
         public async Task SaveChangesAsync()
         {
-            await _appDbContext.SaveChangesAsync();
+            for (int x = 0; x < _repositories.Count; x++)
+            {
+                await _repositories[x].SaveChangesAsync();
+            }
         }
     }
 }

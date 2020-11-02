@@ -8,7 +8,7 @@ namespace SimpleAuthServiceApi.Common.DTOs.Response
 {
     public class ApiGetClaimDto
     {
-        public string ClaimName { get; set; }
-        public string ClaimValue { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

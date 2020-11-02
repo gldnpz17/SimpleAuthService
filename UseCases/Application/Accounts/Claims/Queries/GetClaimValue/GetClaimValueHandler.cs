@@ -25,7 +25,7 @@ namespace Application.Accounts.Claims.Queries.GetClaimValue
         {
             var account = await _unitOfWork.Accounts.ReadByIdAsync(request.AccountId);
 
-            return _mapper.Map<ClaimDto>(account.Claims.Where(i => i.Name == request.ClaimName));
+            return _mapper.Map<ClaimDto>(account.Claims.Where(i => i.Name == request.ClaimName).First());
         }
     }
 }

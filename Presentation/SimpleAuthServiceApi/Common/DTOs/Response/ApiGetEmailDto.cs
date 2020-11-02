@@ -8,6 +8,7 @@ namespace SimpleAuthServiceApi.Common.DTOs.Response
 {
     public class ApiGetEmailDto
     {
-        
+        public string EmailAddress { get; set; }
+        public bool IsVerified { get; set; }
     }
 }

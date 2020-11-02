@@ -16,7 +16,9 @@ namespace Application.Accounts.Commands.DeleteAccount
 
         public async Task<Unit> Handle(DeleteAccountCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.Accounts.DeleteAsync(await _unitOfWork.Accounts.ReadByIdAsync(request.Id));
+            var account = await _unitOfWork.Accounts.ReadByIdAsync(request.Id);
+
+            await _unitOfWork.Accounts.DeleteAsync(account);
 
             await _unitOfWork.SaveChangesAsync();
 

@@ -18,13 +18,13 @@ namespace EFCoreInMemoryPersistence.UnitOfWork
             _appDbContext = new AppDbContext();
 
             Accounts = new AccountsRepository(_appDbContext);
-            EmailVerificationToken = new EmailVerificationTokenRepository(_appDbContext);
+            EmailVerificationTokens = new EmailVerificationTokenRepository(_appDbContext);
             AuthTokens = new AuthTokenRepository(_appDbContext);
         }
 
         public IAccountRepository Accounts { get; private set; }
 
-        public IEmailVerificationTokenRepository EmailVerificationToken { get; private set; }
+        public IEmailVerificationTokenRepository EmailVerificationTokens { get; private set; }
         
         public IAuthTokenRepository AuthTokens { get; private set; }
 

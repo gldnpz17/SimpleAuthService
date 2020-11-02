@@ -47,14 +47,15 @@ namespace Application.Accounts.Commands.CreateAccount
 
             newAccount.Emails.Add(newEmailAddress);
 
-            await _unitOfWork.Accounts.CreateAsync(newAccount);
-            await _unitOfWork.SaveChangesAsync();
-
             newAccount.PrimaryEmail = newEmailAddress;
+
+            await _unitOfWork.Accounts.CreateAsync(newAccount);
 
             await _unitOfWork.SaveChangesAsync();
 
             newEmailAddress.SendVerificationRequest(_emailVerifierService, _alphanumericTokenGenerator);
+
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
         }

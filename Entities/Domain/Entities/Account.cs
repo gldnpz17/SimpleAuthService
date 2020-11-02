@@ -2,6 +2,7 @@
 using Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain.Entities
@@ -52,7 +53,7 @@ namespace Domain.Entities
             }
             set
             {
-                if (!_emails.Contains(value))
+                if (value != null && _emails.First(i => i.EmailAddress == value.EmailAddress) == null)
                 {
                     throw new Exception("email not registered in this account.");
                 }

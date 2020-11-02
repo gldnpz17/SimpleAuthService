@@ -1,5 +1,6 @@
 ﻿using ApplicationDependencies.UnitOfWork.Repositories;
 using Domain.Entities;
+using EFCorePostgresPersistence.Helpers.RepositoryBase;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,38 +10,76 @@ using System.Threading.Tasks;
 
 namespace EFCorePostgresPersistence.UnitOfWork.Repositories
 {
-    class AccountsRepository : IAccountRepository
+    internal class AccountsRepository : RepositoryBase, IAccountRepository
     {
-        private readonly AppDbContext _dbContext;
+        private List<Account> _created = new List<Account>();
+        private List<Account> _removed = new List<Account>();
 
-        internal AccountsRepository(AppDbContext dbContext)
+        public AccountsRepository(AppDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
+
         }
 
         public async Task CreateAsync(Account entity)
         {
-            await _dbContext.Accounts.AddAsync(entity);
+            _created.Add(entity);
         }
 
         public async Task DeleteAsync(Account entity)
         {
-            _dbContext.Accounts.Remove(entity);
+            _removed.Add(entity);
         }
 
         public async Task<IList<Account>> ReadAllAsync()
         {
-            return _dbContext.Accounts.ToList();
+            return _appDbContext.Accounts.ToList();
         }
 
         public async Task<Account> ReadByIdAsync(Guid id)
         {
-            return await _dbContext.Accounts.FirstAsync(account => account.Id == id);
+            return await _appDbContext.Accounts.FirstAsync(account => account.Id == id);
         }
 
         public async Task<Account> ReadByUsernameAsync(string username)
         {
-            return await _dbContext.Accounts.FirstAsync(account => account.Username == username);
+            return await _appDbContext.Accounts.FirstAsync(account => account.Username == username);
+        }
+
+        public override async Task SaveChangesAsync()
+        {
+            for (int x = 0; x < _created.Count; x++)
+            {
+                var account = _created[x];
+
+                //save account first
+                var tempEmail = account.PrimaryEmail;
+                account.PrimaryEmail = null;
+
+                _appDbContext.Accounts.Add(account);
+                await _appDbContext.SaveChangesAsync();
+
+                //then set primary email
+                account.PrimaryEmail = tempEmail;
+
+                await _appDbContext.SaveChangesAsync();
+            }
+            _created.Clear();
+
+            for (int x = 0; x < _removed.Count; x++)
+            {
+                var account = _removed[x];
+
+                //remove primary email first
+                account.PrimaryEmail = null;
+                
+                await _appDbContext.SaveChangesAsync();
+
+                //then remove account
+                _appDbContext.Remove(account);
+
+                await _appDbContext.SaveChangesAsync();
+            }
+            _removed.Clear();
         }
     }
 }

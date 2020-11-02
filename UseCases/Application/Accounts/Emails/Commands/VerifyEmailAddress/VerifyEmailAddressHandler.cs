@@ -17,7 +17,7 @@ namespace Application.Accounts.Emails.Commands.VerifyEmailAddress
 
         public async Task<Unit> Handle(VerifyEmailAddressCommand request, CancellationToken cancellationToken)
         {
-            var matchingToken = await _unitOfWork.EmailVerificationToken.ReadByVerificationTokenAsync(request.VerificationCode);
+            var matchingToken = await _unitOfWork.EmailVerificationTokens.ReadByVerificationTokenAsync(request.VerificationCode);
 
             var email = matchingToken.EmailAddress;
 

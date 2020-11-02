@@ -1,4 +1,5 @@
 # SimpleAuthService
+Contributor(s): Firdaus Bisma Suryakusuma(19/444051/TK/49247)
 This is a simple identity management and authentication service that lets you:
 * Manage accounts and account emails
 * Manage authentication

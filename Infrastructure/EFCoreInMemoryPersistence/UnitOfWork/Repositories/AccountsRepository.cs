@@ -28,14 +28,19 @@ namespace EFCoreInMemoryPersistence.UnitOfWork.Repositories
             _dbContext.Accounts.Remove(entity);
         }
 
-        public Task<IList<Account>> ReadAllAsync()
+        public async Task<IList<Account>> ReadAllAsync()
         {
-            return Task.FromResult((IList<Account>)_dbContext.Accounts.ToList());
+            return _dbContext.Accounts.ToList();
         }
 
-        public Task<Account> ReadByIdAsync(Guid id)
+        public async Task<Account> ReadByIdAsync(Guid id)
         {
-            return Task.FromResult(_dbContext.Accounts.First(account => account.Id == id));
+            return _dbContext.Accounts.First(account => account.Id == id);
+        }
+
+        public async Task<Account> ReadByUsernameAsync(string username)
+        {
+            return _dbContext.Accounts.First(account => account.Username == username);
         }
     }
 }

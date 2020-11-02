@@ -6,7 +6,7 @@ namespace Domain.Entities
 {
     public class PasswordResetToken
     {
-        public string ResetToken { get; set; }
-        public bool IsActive { get; set; }
+        public virtual string ResetToken { get; set; }
+        public virtual bool IsActive { get; set; }
     }
 }

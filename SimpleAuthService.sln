@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCaseManualTestingConsole
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiKeyPersistence", "Presentation\PresentationInfrastructure\ApiKeyPersistence\ApiKeyPersistence.csproj", "{DBD7D690-0776-490E-9B7C-9244A11E9A6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTPEmailSender", "Infrastructure\SMTPEmailSender\SMTPEmailSender.csproj", "{AD7808DC-9F96-4868-9EA7-AA35B26F0F7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{DBD7D690-0776-490E-9B7C-9244A11E9A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBD7D690-0776-490E-9B7C-9244A11E9A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBD7D690-0776-490E-9B7C-9244A11E9A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD7808DC-9F96-4868-9EA7-AA35B26F0F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD7808DC-9F96-4868-9EA7-AA35B26F0F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD7808DC-9F96-4868-9EA7-AA35B26F0F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD7808DC-9F96-4868-9EA7-AA35B26F0F7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

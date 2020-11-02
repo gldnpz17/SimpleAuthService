@@ -18,6 +18,7 @@ using FluentValidation;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MockEmailSender;
+using SMTPEmailSender;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -56,9 +57,15 @@ namespace Application
 
             builder.RegisterGeneric(typeof(ValidationBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
 
-            builder.RegisterType<MockEmailSender.MockEmailSender>().As<IEmailSender>().SingleInstance();
+            builder.RegisterInstance(
+                new SmtpEmailSender(
+                    Environment.GetEnvironmentVariable("EMAIL_CREDENTIAL_ADDRESS"),
+                    Environment.GetEnvironmentVariable("EMAIL_CREDENTIAL_PASSWORD"),
+                    "SimpleAuthService")).As<IEmailSender>().SingleInstance();
+
+            //builder.RegisterType<MockEmailSender.MockEmailSender>().As<IEmailSender>().SingleInstance();
             
-            builder.RegisterType<EFCoreInMemoryPersistence.UnitOfWork.UnitOfWork>().As<IUnitOfWork>().SingleInstance();
+            builder.RegisterType<EFCorePostgresPersistence.UnitOfWork.UnitOfWork>().As<IUnitOfWork>().SingleInstance();
 
             builder.RegisterInstance(
                 new ApplicationConfiguration()

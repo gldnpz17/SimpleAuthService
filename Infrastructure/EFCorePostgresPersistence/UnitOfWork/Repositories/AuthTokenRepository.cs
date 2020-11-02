@@ -1,5 +1,6 @@
 ﻿using ApplicationDependencies.UnitOfWork.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace EFCorePostgresPersistence.UnitOfWork.Repositories
 {
-    class AuthenticationRepository : IAuthenticationRepository
+    public class AuthTokenRepository : IAuthTokenRepository
     {
         private readonly AppDbContext _dbContext;
 
-        internal AuthenticationRepository(AppDbContext dbContext)
+        internal AuthTokenRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<Domain.Entities.Authentication> GetAuthenticationAsync()
+        public async Task<AuthToken> ReadAuthTokenByTokenStringAsync(string tokenString)
         {
-            throw new Exception();
+            return await _dbContext.AuthTokens.FirstAsync(i => i.TokenString == tokenString);
         }
     }
 }

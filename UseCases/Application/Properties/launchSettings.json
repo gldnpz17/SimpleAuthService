@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Application": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "EMAIL_CREDENTIAL_ADDRESS": "nokanabatsuyo@gmail.com",
+        "EMAIL_CREDENTIAL_PASSWORD": "2VXrQzFXf7BvpyF"
+      }
+    }
+  }
+}

@@ -1,10 +1,7 @@
 {
   "profiles": {
     "ApiKeyPersistence": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "API_KEY_CONNECTION_STRING": "User ID = beybfgshgmrltm; Password = 66fe44936aba095fa95715190a73693f589859d7821cdb4dae39467cb17b8e37; Host = ec2-3-216-92-193.compute-1.amazonaws.com; Port = 5432; Database = d2l6anfb89atvi"
-      }
+      "commandName": "Project"
     }
   }
 }

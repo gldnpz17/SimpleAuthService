@@ -109,7 +109,7 @@ namespace SimpleAuthServiceApi.Controllers
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<ActionResult<ApiAuthTokenDto>> PasswordLogin([FromBody]ApiPasswordLoginDto dto)
         {
             var result = await _mediator.Send(
@@ -127,7 +127,7 @@ namespace SimpleAuthServiceApi.Controllers
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        [HttpGet("verify-auth-token")]
+        [HttpPost("verify-auth-token")]
         public async Task<ActionResult<ApiVerifyTokenGetAccountDto>> AuthenticateToken([FromBody]ApiAuthenticateTokenDto dto)
         {
             var result = await _mediator.Send(
@@ -136,7 +136,7 @@ namespace SimpleAuthServiceApi.Controllers
                     AuthToken = dto.AuthToken
                 });
 
-            return Ok(_mapper.Map<ApiAuthenticateTokenDto>(result));
+            return Ok(_mapper.Map<ApiGetAccountDto>(result));
         }
 
         /// <summary>

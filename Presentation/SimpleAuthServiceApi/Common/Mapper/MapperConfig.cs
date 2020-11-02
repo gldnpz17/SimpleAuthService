@@ -26,6 +26,8 @@ namespace SimpleAuthServiceApi.Common.Mapper
                 {
                     config.CreateMap<Application.Accounts.Queries.DTOs.AccountDto, ApiGetAccountDto>();
 
+                    config.CreateMap<Application.Authentication.Queries.DTOs.AccountDto, ApiGetAccountDto>();
+
                     config.CreateMap<AuthTokenDto, ApiAuthTokenDto>();
 
                     config.CreateMap<Application.Authentication.Queries.DTOs.AccountDto, ApiVerifyTokenGetAccountDto>();

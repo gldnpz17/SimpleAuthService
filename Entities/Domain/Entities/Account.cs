@@ -1,4 +1,5 @@
 ﻿using Domain.Helpers;
+using Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,16 +24,18 @@ namespace Domain.Entities
                 };
         }
 
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
 
-        public string Username { get; set; }
+        public virtual string Username { get; set; }
 
-        public PasswordCredential PasswordCredential { get; set; }
+        public virtual PasswordCredential PasswordCredential { get; set; }
 
-        public IList<Claim> Claims { get; private set; } = new List<Claim>();
+        public virtual IList<Claim> Claims { get; private set; } = new List<Claim>();
+
+        public virtual IList<AuthToken> AuthTokens { get; private set; } = new List<AuthToken>();
 
         private ListProxy<AccountEmailAddress> _emails = new ListProxy<AccountEmailAddress>(new List<AccountEmailAddress>());
-        public IList<AccountEmailAddress> Emails 
+        public virtual IList<AccountEmailAddress> Emails 
         {
             get
             {
@@ -41,7 +44,7 @@ namespace Domain.Entities
         }
 
         private AccountEmailAddress _primaryEmail;
-        public AccountEmailAddress PrimaryEmail 
+        public virtual AccountEmailAddress PrimaryEmail 
         {
             get 
             {
@@ -58,6 +61,34 @@ namespace Domain.Entities
                     _primaryEmail = value;
                 }
             } 
+        }
+
+        public AuthToken GetAuthToken(
+            string password,
+            IPasswordHashingService passwordHasher,
+            IAlphanumericTokenGenerator alphanumericTokenGenerator,
+            IDateTimeService dateTimeService)
+        {
+            var accountSalt = PasswordCredential.PasswordSalt;
+            if (PasswordCredential.HashedPassword == passwordHasher.HashPassword(password, accountSalt))
+            {
+                var newAuthToken =
+                    new AuthToken()
+                    {
+                        TokenString = alphanumericTokenGenerator.GenerateAlphanumericToken(64),
+                        LastUsed = dateTimeService.GetCurrentDateTime(),
+                        Account = this
+                    };
+
+                AuthTokens.Add(newAuthToken);
+
+                return newAuthToken;
+            }
+            else
+            {
+                throw new Exception("Incorrect Username or Password.");
+            }
+            
         }
     }
 }

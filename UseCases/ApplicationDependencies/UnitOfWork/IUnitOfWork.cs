@@ -9,7 +9,7 @@ namespace ApplicationDependencies.UnitOfWork
     public interface IUnitOfWork
     {
         IAccountRepository Accounts { get; }
-        IAuthenticationRepository Authentication { get; }
+        IAuthTokenRepository AuthTokens { get; }
         IEmailVerificationTokenRepository EmailVerificationToken { get; }
         Task SaveChangesAsync();
     }

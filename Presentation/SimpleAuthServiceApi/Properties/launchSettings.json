@@ -13,7 +13,11 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "EMAIL_CREDENTIAL_ADDRESS": "nokanabatsuyo@gmail.com",
+        "SIMPLE_AUTH_SERVICE_CONNECTION_STRING": "User ID = beybfgshgmrltm; Password = 66fe44936aba095fa95715190a73693f589859d7821cdb4dae39467cb17b8e37; Server = ec2-3-216-92-193.compute-1.amazonaws.com; Port = 5432; Database = d2l6anfb89atvi; SslMode = Require; Trust Server Certificate = true;",
+        "EMAIL_CREDENTIAL_PASSWORD": "2VXrQzFXf7BvpyF",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "API_KEY_CONNECTION_STRING": "User ID = beybfgshgmrltm; Password = 66fe44936aba095fa95715190a73693f589859d7821cdb4dae39467cb17b8e37; Server = ec2-3-216-92-193.compute-1.amazonaws.com; Port = 5432; Database = d2l6anfb89atvi; SslMode = Require; Trust Server Certificate = true;"
       }
     },
     "SimpleAuthServiceApi": {

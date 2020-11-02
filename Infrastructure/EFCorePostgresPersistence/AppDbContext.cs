@@ -19,6 +19,7 @@ namespace EFCorePostgresPersistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("SIMPLE_AUTH_SERVICE_CONNECTION_STRING"));
         }
 

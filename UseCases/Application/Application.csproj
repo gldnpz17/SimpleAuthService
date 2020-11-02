@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,6 +9,7 @@
     <ProjectReference Include="..\..\Infrastructure\EFCoreInMemoryPersistence\EFCoreInMemoryPersistence.csproj" />
     <ProjectReference Include="..\..\Infrastructure\EFCorePostgresPersistence\EFCorePostgresPersistence.csproj" />
     <ProjectReference Include="..\..\Infrastructure\MockEmailSender\MockEmailSender.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SMTPEmailSender\SMTPEmailSender.csproj" />
     <ProjectReference Include="..\ApplicationDependencies\ApplicationDependencies.csproj" />
   </ItemGroup>
 

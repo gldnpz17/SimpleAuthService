@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace ApiKeyPersistence
 {

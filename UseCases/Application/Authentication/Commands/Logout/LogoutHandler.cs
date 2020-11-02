@@ -21,9 +21,9 @@ namespace Application.Authentication.Commands.Logout
 
         public async Task<Unit> Handle(LogoutCommand request, CancellationToken cancellationToken)
         {
-            var authentication = await _unitOfWork.Authentication.GetAuthenticationAsync();
-            
-            authentication.Logout(request.AuthToken, _dateTimeService);
+            var authToken = await _unitOfWork.AuthTokens.ReadAuthTokenByTokenStringAsync(request.AuthToken);
+
+            authToken.DestroyToken();
 
             await _unitOfWork.SaveChangesAsync();
 

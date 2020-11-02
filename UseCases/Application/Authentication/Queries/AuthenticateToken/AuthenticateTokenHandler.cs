@@ -26,9 +26,9 @@ namespace Application.Authentication.Queries.AuthenticateToken
 
         public async Task<AccountDto> Handle(AuthenticateTokenQuery request, CancellationToken cancellationToken)
         {
-            var authentication = await _unitOfWork.Authentication.GetAuthenticationAsync();
+            var token = await _unitOfWork.AuthTokens.ReadAuthTokenByTokenStringAsync(request.AuthToken);
 
-            var result = authentication.VerifyAuthToken(request.AuthToken, _dateTimeService);
+            var result = token.GetAssociatedAccount(_dateTimeService);
 
             await _unitOfWork.SaveChangesAsync();
 

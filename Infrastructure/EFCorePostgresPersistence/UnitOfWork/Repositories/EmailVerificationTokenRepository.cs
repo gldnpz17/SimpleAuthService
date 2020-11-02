@@ -1,5 +1,6 @@
 ﻿using ApplicationDependencies.UnitOfWork.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,9 @@ namespace EFCorePostgresPersistence.UnitOfWork.Repositories
             _appDbContext = appDbContext;
         }
 
-        public Task<EmailVerificationToken> ReadByVerificationTokenAsync(string verificationToken)
+        public async Task<EmailVerificationToken> ReadByVerificationTokenAsync(string verificationToken)
         {
-            return Task.FromResult(_appDbContext.EmailVerificationTokens.First(i => i.VerificationToken == verificationToken));
+            return await _appDbContext.EmailVerificationTokens.FirstAsync(i => i.VerificationToken == verificationToken);
         }
     }
 }

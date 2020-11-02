@@ -32,13 +32,12 @@ namespace Application.Authentication.Queries.PasswordLogin
 
         public async Task<AuthTokenDto> Handle(PasswordLoginQuery request, CancellationToken cancellationToken)
         {
-            var authentication = await _unitOfWork.Authentication.GetAuthenticationAsync();
+            var account = await _unitOfWork.Accounts.ReadByUsernameAsync(request.Username);
 
-            var result = authentication.PasswordLogin(
-                request.Username, 
-                request.Password, 
-                _passwordHashingService, 
-                _alphanumericTokenGenerator, 
+            var result = account.GetAuthToken(
+                request.Password,
+                _passwordHashingService,
+                _alphanumericTokenGenerator,
                 _dateTimeService);
 
             await _unitOfWork.SaveChangesAsync();

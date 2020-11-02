@@ -9,12 +9,12 @@ namespace Domain.Entities
 {
     public class PasswordCredential
     {
-        public Guid AccountId { get; set; }
-        public Account Account { get; set; }
-        public string HashedPassword { get; set; }
-        public string PasswordSalt { get; set; }
-        public PasswordHashingAlgorithm PasswordHashingAlgorithm { get; set; }
-        public IList<PasswordResetToken> PasswordResetTokens { get; private set; } = new List<PasswordResetToken>();
+        public virtual Guid AccountId { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual string HashedPassword { get; set; }
+        public virtual string PasswordSalt { get; set; }
+        public virtual PasswordHashingAlgorithm PasswordHashingAlgorithm { get; set; }
+        public virtual IList<PasswordResetToken> PasswordResetTokens { get; private set; } = new List<PasswordResetToken>();
 
         public void SetPassword(
             string password, 

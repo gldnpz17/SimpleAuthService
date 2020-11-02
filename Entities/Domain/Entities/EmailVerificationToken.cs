@@ -6,8 +6,8 @@ namespace Domain.Entities
 {
     public class EmailVerificationToken
     {
-        public string VerificationToken { get; set; }
-        public AccountEmailAddress EmailAddress { get; set; }
-        public bool IsActive { get; set; }
+        public virtual string VerificationToken { get; set; }
+        public virtual AccountEmailAddress EmailAddress { get; set; }
+        public virtual bool IsActive { get; set; }
     }
 }

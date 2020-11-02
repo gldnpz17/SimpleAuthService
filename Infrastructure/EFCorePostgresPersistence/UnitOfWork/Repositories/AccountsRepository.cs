@@ -1,5 +1,6 @@
 ﻿using ApplicationDependencies.UnitOfWork.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace EFCorePostgresPersistence.UnitOfWork.Repositories
 
         public async Task CreateAsync(Account entity)
         {
-            _dbContext.Accounts.Add(entity);
+            await _dbContext.Accounts.AddAsync(entity);
         }
 
         public async Task DeleteAsync(Account entity)
@@ -27,14 +28,19 @@ namespace EFCorePostgresPersistence.UnitOfWork.Repositories
             _dbContext.Accounts.Remove(entity);
         }
 
-        public Task<IList<Account>> ReadAllAsync()
+        public async Task<IList<Account>> ReadAllAsync()
         {
-            return Task.FromResult((IList<Account>)_dbContext.Accounts.ToList());
+            return _dbContext.Accounts.ToList();
         }
 
-        public Task<Account> ReadByIdAsync(Guid id)
+        public async Task<Account> ReadByIdAsync(Guid id)
         {
-            return Task.FromResult(_dbContext.Accounts.First(account => account.Id == id));
+            return await _dbContext.Accounts.FirstAsync(account => account.Id == id);
+        }
+
+        public async Task<Account> ReadByUsernameAsync(string username)
+        {
+            return await _dbContext.Accounts.FirstAsync(account => account.Username == username);
         }
     }
 }

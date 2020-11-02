@@ -9,9 +9,9 @@ namespace Domain.Entities
 {
     public class AccountEmailAddress
     {
-        public string EmailAddress { get; set; }
-        public bool IsVerified { get; set; }
-        public IList<EmailVerificationToken> VerificationTokens { get; private set; } = new List<EmailVerificationToken>();
+        public virtual string EmailAddress { get; set; }
+        public virtual bool IsVerified { get; set; }
+        public virtual IList<EmailVerificationToken> VerificationTokens { get; private set; } = new List<EmailVerificationToken>();
 
         public void SendVerificationRequest(IEmailVerifierService emailVerifier, IAlphanumericTokenGenerator tokenGenerator)
         {

@@ -12,5 +12,6 @@ namespace ApplicationDependencies.UnitOfWork.Repositories
         IGenericReadAllRepository<Account>
     {
         Task<Account> ReadByIdAsync(Guid id);
+        Task<Account> ReadByUsernameAsync(string username);
     }
 }

@@ -2,14 +2,13 @@
 Contributor(s):
 * Firdaus Bisma Suryakusuma ([github](https://github.com/gldnpz17)) 
 
-API Preview: http://simpleauthservicedemo.azurewebsites.net/swagger/index.html  
-API Key = "iniapikey"
-
-
 This is a simple identity management and authentication service that lets you:
 * Manage accounts and account emails
 * Manage authentication
 * Manage account claims
+
+API Preview: http://simpleauthservicedemo.azurewebsites.net/swagger/index.html  
+API Key = "iniapikey"
 
 ## Technologies
 * .NET Standard 2.0

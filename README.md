@@ -1,5 +1,10 @@
 # SimpleAuthService
-Contributor(s): Firdaus Bisma Suryakusuma ([github](https://github.com/gldnpz17))  
+Contributor(s):
+* Firdaus Bisma Suryakusuma ([github](https://github.com/gldnpz17)) 
+
+API Preview: http://simpleauthservicedemo.azurewebsites.net/swagger/index.html  
+API Key = "iniapikey"
+
 
 This is a simple identity management and authentication service that lets you:
 * Manage accounts and account emails

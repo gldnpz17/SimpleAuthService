@@ -7,7 +7,7 @@ This is a simple identity management and authentication service that lets you:
 * Manage authentication
 * Manage account claims
 
-API Preview: http://simpleauthservicedemo.azurewebsites.net/swagger/index.html  
+API Preview & Documentation: http://simpleauthservicedemo.azurewebsites.net/swagger/index.html  
 API Key = "iniapikey"
 
 ## Technologies

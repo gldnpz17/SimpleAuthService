@@ -17,7 +17,7 @@ API Key = "iniapikey"
 * MediatR (Mediator to facilitate Command Query Responsibility Segregation)
 * Automapper (Object-object mapping)
 * FluentValidation (Input validation)
-* PostgreSQL (Persistence)
+* PostgreSQL (Persistence RDBMS)
 * ASP.NET Core (Web Framework)
 * NSwag (API Documentation)
 

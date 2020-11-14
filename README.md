@@ -1,5 +1,5 @@
 # SimpleAuthService
-(Completed on 06/11/2020)
+(Completed on 06/11/2020)  
 Contributor(s):
 * Firdaus Bisma Suryakusuma ([github](https://github.com/gldnpz17)) 
 

@@ -1,7 +1,4 @@
 # SimpleAuthService
-Contributor(s):
-* Firdaus Bisma Suryakusuma ([github](https://github.com/gldnpz17)) 
-
 This is a simple identity management and authentication service that lets you:
 * Manage accounts and account emails
 * Manage authentication
